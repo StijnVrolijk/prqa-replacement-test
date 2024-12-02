@@ -1,7 +1,6 @@
 name: 'Manual check'
 
 on:
-  workflow_call:
   issue_comment:
     types:
       - created
@@ -13,13 +12,13 @@ jobs:
     steps:
       - name: Check if the pull request is manually checked
         id: manual-check-validation
-        uses: actions/github-script@v3
+        uses: actions/github-script@v7
         with:
           script: |
             const directive = '[x] This was manually checked';
             const payload = context.payload;
 
-            echo `Payload: ${payload}`;
+            console.log(context)
 
             let body = '';
 

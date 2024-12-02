@@ -9,6 +9,15 @@ defaults:
     shell: 'script -q -e -c "export TERM=xterm-256color; bash {0}"'
 
 jobs:
-  manual-check:
-    uses: ./.github/workflows/manual-check.yaml
-    secrets: inherit
+  comment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '[ ] This was manually checked'
+            })
