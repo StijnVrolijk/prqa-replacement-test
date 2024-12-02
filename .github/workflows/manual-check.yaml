@@ -1,5 +1,4 @@
 ---
-name: Manual check
 
 on:
   issue_comment:
@@ -9,6 +8,8 @@ on:
 
 jobs:
   test:
+    name: 'Manual check'
+    if: ${{ github.event.issue.pull_request }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
