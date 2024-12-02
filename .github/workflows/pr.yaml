@@ -1,0 +1,14 @@
+---
+name: Pull Request
+
+on:
+  pull_request:
+
+defaults:
+  run:
+    shell: 'script -q -e -c "export TERM=xterm-256color; bash {0}"'
+
+jobs:
+  manual-check:
+    uses: ./.github/workflows/manual-check.yaml
+    secrets: inherit
