@@ -12,8 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: refs/pull/${{ github.event.issue.number }}/head
       - name: Check if the pull request is manually checked
         id: manual-check-validation
         uses: actions/github-script@v7
