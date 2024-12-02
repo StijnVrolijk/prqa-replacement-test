@@ -8,4 +8,32 @@ on:
       - edited
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if the pull request is manually checked
+        id: manual-check-validation
+        uses: actions/github-script@v3
+        with:
+          script: |
+            const directive = '[x] This was manually checked';
+            const payload = context.payload;
 
+            let body = '';
+
+            if (payload.comment) {
+              body = payload.comment.body;
+            }
+
+            return body.includes(directive);
+
+      - name: Will fail
+        uses: actions/github-script@v3
+        with:
+          script: |
+            core.setFailed('Set to fail')
+
+      - name: Allowed to run if the previous step succeded or the directive present
+        if: success() || steps.manual-check-validation.outputs.result == 'true'
+        run: |
+          echo "Success!"
