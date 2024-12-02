@@ -26,16 +26,8 @@ jobs:
               body = payload.comment.body;
             }
 
-            return body.includes(directive);
-
-      - name: Will fail
-        uses: actions/github-script@v3
-        with:
-          script: |
-            console.log(steps.manual-check-validation);
-            core.setFailed('Set to fail');
-
-      - name: Allowed to run if the previous step succeded or the directive present
-        if: success() || steps.manual-check-validation.outputs.result == 'true'
-        run: |
-          echo "Success!"
+            if (body.includes(directive)) {
+              console.log('Success!')
+            } else {
+              core.setFailed('PR not marked as manually checked');
+            }
