@@ -21,6 +21,3 @@ jobs:
               repo: context.repo.repo,
               body: '- [ ] This was manually checked'
             })
-
-  manual-check:
-    uses: ./.github/workflows/manual-check.yaml
