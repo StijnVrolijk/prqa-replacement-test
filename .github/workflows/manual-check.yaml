@@ -1,6 +1,8 @@
-name: 'Manual check'
+---
+name: Manual check
 
 on:
+  workflow_call:
   issue_comment:
     types:
       - created
