@@ -19,6 +19,8 @@ jobs:
             const directive = '[x] This was manually checked';
             const payload = context.payload;
 
+            echo `Payload: ${payload}`;
+
             let body = '';
 
             if (payload.comment) {
