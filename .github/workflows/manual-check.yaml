@@ -15,7 +15,7 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            const directive = '[x] This was manually checked';
+            const directive = '- [x] This was manually checked';
             const payload = context.payload;
 
             console.log(context)
@@ -32,7 +32,8 @@ jobs:
         uses: actions/github-script@v3
         with:
           script: |
-            core.setFailed('Set to fail')
+            console.log(steps.manual-check-validation);
+            core.setFailed('Set to fail');
 
       - name: Allowed to run if the previous step succeded or the directive present
         if: success() || steps.manual-check-validation.outputs.result == 'true'
